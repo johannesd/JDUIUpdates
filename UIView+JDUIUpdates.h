@@ -1,15 +1,15 @@
 //
-//  UIViewController+JDUIUpdates.h
+//  UIView+JDUIUpdates.h
+//  Pods
 //
-//  Created by Johannes Dörr on 10.05.14.
-//  Copyright (c) 2014 Johannes Dörr. All rights reserved.
+//  Created by Johannes Dörr on 30.05.16.
+//
 //
 
 #import <UIKit/UIKit.h>
 #import "JDUIUpdates.h"
 
-
-@interface UIViewController (JDUIUpdates)
+@interface UIView (JDUIUpdates)
 
 - (void)jd_UIUpdates_activateUIUpdates;
 - (void)jd_UIUpdates_deactivateUIUpdates;

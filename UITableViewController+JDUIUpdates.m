@@ -8,6 +8,7 @@
 #import "UITableViewController+JDUIUpdates.h"
 #import <JDBindings/NSObject+JDOneWayBinding.h>
 #import <objc/runtime.h>
+#import <BlocksKit/NSObject+BKBlockExecution.h>
 
 @implementation UITableViewController (JDUIUpdates)
 
@@ -24,9 +25,14 @@
     [super jd_UIUpdates_activateUIUpdates];
     NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
     [self.tableView reloadData];
-    for (NSIndexPath *indexPath in indexPaths) {
-        [self.tableView selectRowAtIndexPath:indexPath animated:FALSE scrollPosition:UITableViewScrollPositionNone];
-    }
+    [NSObject bk_performBlock:^{
+        for (NSIndexPath *indexPath in indexPaths) {
+            [self.tableView selectRowAtIndexPath:indexPath animated:FALSE scrollPosition:UITableViewScrollPositionNone];
+        }
+        for (NSIndexPath *indexPath in indexPaths) {
+            [self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+        }
+    } afterDelay:0];
 //    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
 }
 

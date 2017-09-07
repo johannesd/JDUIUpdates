@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.summary      = "Categories that make it easy to bind UI elements to a data source while preventing updates when the app is in the background"
 
   s.description  = <<-DESC
-
+    JDUIUpdates
                    DESC
 
   s.homepage     = "https://github.com/johannesd/JDUIUpdates"

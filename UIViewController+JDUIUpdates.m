@@ -28,6 +28,7 @@ static char updatesAreActivatedKey;
 
 - (void)jd_UIUpdates_viewWillAppear:(BOOL)animated
 {
+    [self jd_UIUpdates_viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jd_UIUpdates_applicationWillEnterForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
@@ -41,6 +42,7 @@ static char updatesAreActivatedKey;
 
 - (void)jd_UIUpdates_viewWillDisappear:(BOOL)animated
 {
+    [self jd_UIUpdates_viewWillDisappear:animated];
     [self jd_UIUpdates_deactivateUIUpdates];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
