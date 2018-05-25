@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "JDUIUpdates"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "Categories that make it easy to bind UI elements to a data source while preventing updates when the app is in the background"
 
   s.description  = <<-DESC
@@ -129,6 +129,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
-  s.dependency 'JDBindings', '~> 0.0.1'
+  s.dependency 'JDBindings'
 
 end
