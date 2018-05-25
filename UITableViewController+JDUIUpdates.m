@@ -25,15 +25,24 @@
     [super jd_UIUpdates_activateUIUpdates];
     NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
     [self.tableView reloadData];
-    [NSObject bk_performBlock:^{
-        for (NSIndexPath *indexPath in indexPaths) {
-            [self.tableView selectRowAtIndexPath:indexPath animated:FALSE scrollPosition:UITableViewScrollPositionNone];
-        }
-        for (NSIndexPath *indexPath in indexPaths) {
-            [self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
-        }
-    } afterDelay:0];
-//    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+
+    for (NSIndexPath *indexPath in indexPaths) {
+        [self.tableView selectRowAtIndexPath:indexPath animated:FALSE scrollPosition:UITableViewScrollPositionNone];
+    }
+
+    BOOL shouldClearSelectionOnViewWillAppear = self.clearsSelectionOnViewWillAppear;
+    if (self.clearsSelectionOnViewWillAppear && self.transitionCoordinator != nil) {
+        self.clearsSelectionOnViewWillAppear = false;
+        [self.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+            // It would be best to perform the animation here, but selectRowAtIndexPath seems not to be done somehow, and the
+        } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+            NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+            for (NSIndexPath *indexPath in indexPaths) {
+                [self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+            }
+            self.clearsSelectionOnViewWillAppear = shouldClearSelectionOnViewWillAppear;
+        }];
+    }
 }
 
 - (void)jd_UIUpdates_deactivateUIUpdates
